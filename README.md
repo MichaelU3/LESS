@@ -114,20 +114,43 @@ when关键字用以定义一个导引序列
 
 了更好组织CSS或者单纯是为了更好的封装，将一些变量或者混合模块打包起来
 
-`
-#bundle {
-  .button () {
-    display: block;
-    border: 1px solid black;
-    background-color: grey;
-    &:hover { background-color: white }
-  }
-  .tab { ... }
-  .citation { ... }
-}
-#header a {
-  color: orange;
-  #bundle > .button;
-}
 
-`
+> \#bundle {  
+>  .button () {  
+>    display: block;  
+>    border: 1px solid black;  
+>    background-color: grey;  
+>    &:hover { background-color: white }  
+>  }  
+>  .tab { ... }  
+>  .citation { ... }  
+>}  
+>\#header a {  
+>  color: orange;  
+>  #bundle > .button;  
+>}  
+
+### 字符串插值
+
+@{name}这样的结构进行字符串赋值
+
+> @base-url: "http://assets.fnord.com";  
+> background-image: url("@{base-url}/images/bg.png");
+
+### 避免编译
+
+输出一些不正确的CSS语法或者使用一些 LESS不认识的专有语法,可以在字符串前加上一个 ~, 将要避免编译的值用 “”包含起来
+
+> .class {  
+>   filter: ~"ms:alwaysHasItsOwnSyntax.For.Stuff()";  
+> }  
+
+### JavaScript 表达式
+
+可以通过反引号的方式使用JavaScript 表达式
+
+> @var: `"hello".toUpperCase() + '!'`;  
+> 输出  
+> @var: "HELLO!";  
+
+
